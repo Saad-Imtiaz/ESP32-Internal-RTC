@@ -42,7 +42,9 @@ The NTPClient object returns the time in the format 2018-03-28T16:00:13Z, which 
 
 ## Additional resources
 
-ESP32 Arduino Core documentation
-WiFi library documentation
-NTPClient library documentation
-WiFiUDP library documentation
+ESP32 Arduino Core documentation <https://github.com/espressif/arduino-esp32>
+
+WiFi library documentation <https://www.arduino.cc/reference/en/libraries/wifi/>
+
+NTPClient library documentation <https://github.com/arduino-libraries/NTPClient>
+
