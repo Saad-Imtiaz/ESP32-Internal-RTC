@@ -1,50 +1,37 @@
 # ESP32-Internal-RTC
+This is an ESP32 sketch that connects to a WiFi network and retrieves the current time from an NTP (Network Time Protocol) server. The time is then set on the ESP32's real-time clock (RTC).
 
-## Overview
-This code fetches the current time from an NTP server and saves it to the internal real-time clock (RTC) of the ESP32. It then uses the RTC to display the time on the serial monitor in the format 2018-03-28T16:00:13Z after every 1 second.
+## Required Libraries
+This sketch requires the following libraries:
 
-## Dependencies
-This code requires the following libraries:
+Arduino.h
+WiFi.h
+NTPClient.h
+WiFiUdp.h
 
-- WiFi: This library is used to connect the ESP32 to a WiFi network.
-- NTPClient: This library is used to fetch the time from an NTP server.
-- WiFiUDP: This library is used to create a UDP connection for the NTPClient.
+## Configuration
+Before uploading the sketch to your Arduino, you'll need to configure it with your WiFi network's SSID and password. Replace the following lines of code with your own values:
 
-## Setup
-1- Specify the SSID and password of your WiFi network in the ssid and password variables, respectively.
+```
+const char *ssid = "your-ssid";
+const char *password = "your-password";
 
-2- Set the time offset to your local timezone using the setTimeOffset function.
+```
 
-3- Upload the code to the ESP32.
+You may also need to adjust the time offset to your local timezone. Replace 0 with the correct value:
 
-## How it works
-1- The code connects to the WiFi network using the WiFi.begin function.
+```
+timeClient.setTimeOffset(0); // set time offset to your local timezone
+```
+## Usage
 
-2- It then initializes the NTPClient object and fetches the time from the NTP server using the update function.
-
-3- The current time is extracted from the NTPClient object and saved to the RTC using the rtc_clk_set_time function.
-
-4- In the loop function, the code retrieves the current time from the RTC using the rtc_clk_get_time function and formats it in the desired format using the String class.
-
-5- The formatted time is then displayed on the serial monitor.
-
-## Note
-You can also set the RTC time using the "rtc_clk_set_epoch" function, which takes the UNIX timestamp (number of seconds since Jan 1, 1970) as an input. You can obtain the UNIX timestamp by calling the getEpochTime function of the NTPClient object.
-The NTPClient object returns the time in the format 2018-03-28T16:00:13Z, which can be extracted using the getFormattedDate function.
-
-## Customization
-- You can change the time interval at which the time is displayed by modifying the delay time in the delay function in the loop function.
-- You can customize the format in which the time is displayed by modifying the formattedTime string in the loop function.
+1. Upload the sketch to your Arduino
+2. Connect the Arduino to your WiFi network
+3. The Arduino will retrieve the current time from the NTP server and set it on the RTC
+4. The current time will be displayed on the serial monitor in the following format: **YYYY-MM-DDTHH:MM:SSZ**
+5. The time will be updated every 1 second.
 
 ## Troubleshooting
-- If the ESP32 is unable to connect to the WiFi network, check that the ssid and password variables are set correctly and that the WiFi network is within range.
-- If the time is not being displayed correctly, check that the time offset is set correctly using the setTimeOffset function.
-
-## Additional resources
-
-ESP32 Arduino Core documentation (<https://github.com/espressif/arduino-esp32>)
-
-WiFi library documentation (<https://www.arduino.cc/reference/en/libraries/wifi/>)
-
-NTPClient library documentation (<https://github.com/arduino-libraries/NTPClient>)
-
+- If the Arduino is unable to connect to the WiFi network, check that the SSID and password are correct.
+- If the time is not being displayed correctly, check that the time offset is set to your local timezone.
+- If the time is not being updated, try forcing an update by calling the ```timeClient.forceUpdate``` function.
