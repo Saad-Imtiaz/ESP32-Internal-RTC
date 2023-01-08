@@ -15,7 +15,6 @@ Before uploading the sketch to your Arduino, you'll need to configure it with yo
 ```
 const char *ssid = "your-ssid";
 const char *password = "your-password";
-
 ```
 
 You may also need to adjust the time offset to your local timezone. Replace 0 with the correct value:
